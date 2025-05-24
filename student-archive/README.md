@@ -52,14 +52,14 @@ A web-based archive system for storing, managing, and browsing student projects.
     php artisan key:generate
 
 6. **Configure your .env file**
-In your .env file, change the database connection to SQLite:
+    In your .env file, change the database connection to SQLite:
     ```dotenv
     DB_CONNECTION=sqlite
     DB_DATABASE=${DB_DATABASE}
-Then, create a SQLite database file:
+    Then, create a SQLite database file:
     ```bash
     touch database/database.sqlite
-And update your .env again:
+A   nd update your .env again:
     ```dotenv
     DB_CONNECTION=sqlite
     DB_DATABASE=./database/database.sqlite
@@ -71,6 +71,6 @@ And update your .env again:
 8. **Run the App**
     ```bash
     php artisan serve
-Open the link http://localhost:8000 to view the app.
+    Open the link http://localhost:8000 to view the app.
 
 
