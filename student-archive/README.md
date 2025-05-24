@@ -57,8 +57,8 @@ A web-based archive system for storing, managing, and browsing student projects.
     DB_CONNECTION=sqlite
     DB_DATABASE=${DB_DATABASE}
  Then, create a SQLite database file:
-    ```bash
-    touch database/database.sqlite
+        ```bash
+        touch database/database.sqlite
  And update your .env again:
     ```dotenv
     DB_CONNECTION=sqlite
