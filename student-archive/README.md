@@ -52,7 +52,7 @@ A web-based archive system for storing, managing, and browsing student projects.
     php artisan key:generate
 
 6. **Configure your .env file**
-    In your .env file, change the database connection to SQLite:
+In your .env file, change the database connection to SQLite:
     ```dotenv
     DB_CONNECTION=sqlite
     DB_DATABASE=${DB_DATABASE}
