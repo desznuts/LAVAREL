@@ -56,8 +56,7 @@ A web-based archive system for storing, managing, and browsing student projects.
     ```dotenv
     DB_CONNECTION=sqlite
     DB_DATABASE=${DB_DATABASE}
-
-    Then, create a SQLite database file:
+Then, create a SQLite database file:
     ```bash
     touch database/database.sqlite
 And update your .env again:
@@ -72,6 +71,6 @@ And update your .env again:
 8. **Run the App**
     ```bash
     php artisan serve
-    Open the link http://localhost:8000 to view the app.
+Open the link http://localhost:8000 to view the app.
 
 
