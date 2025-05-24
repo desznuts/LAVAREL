@@ -33,3 +33,8 @@ A web-based archive system for storing, managing, and browsing student projects.
    ```bash
    git clone https://github.com/desznuts/student-project-archive.git
    cd student-project-archive
+
+2. **Install PHP Dependencies**
+   ```bash
+   composer install
+
