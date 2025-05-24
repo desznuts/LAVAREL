@@ -60,16 +60,17 @@ A web-based archive system for storing, managing, and browsing student projects.
 7. **Create SQlite database file**
     ```bash
     touch database/database.sqlite
- And update your .env again:
+
+8. **Update your .env again**    
     ```dotenv
     DB_CONNECTION=sqlite
     DB_DATABASE=./database/database.sqlite
 
-7. **Run Migrations**
+9. **Run Migrations**
     ```bash
     php artisan migrate
 
-8. **Run the App**
+10. **Run the App**
     ```bash
     php artisan serve
 Open the link http://localhost:8000 to view the app.
