@@ -53,7 +53,7 @@
         <section id="home" class="text-center fade-in-up max-w-3xl mx-auto">
             <h2 class="text-5xl font-extrabold mb-6 leading-tight tracking-tight text-gray-900">Explore &amp; Share Student Projects</h2>
             <p class="text-xl text-gray-700 mb-8 leading-relaxed">A digital archive for academic works, capstone projects, and innovations.</p>
-            <a href="{{ route('dashboard') }}" class="inline-block bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-8 py-4 rounded-lg shadow-lg text-lg font-semibold transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl">Browse Projects</a>
+            <a href="{{ route('projects.index') }}" class="inline-block bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-8 py-4 rounded-lg shadow-lg text-lg font-semibold transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl">Browse Projects</a>
         </section>
 
         <section id="features" class="max-w-4xl mx-auto text-left">
