@@ -19,6 +19,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('projects', ProjectController::class);
+
+    Route::get('/projects/{project}/download', [ProjectController::class, 'download'])->name('projects.download');
+    Route::get('/projects/{project}/preview', [ProjectController::class, 'preview'])->name('projects.preview');
+
+
 });
 
 require __DIR__.'/auth.php';
