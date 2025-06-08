@@ -2,13 +2,13 @@
     <div class="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center mb-8 mt-6">
             <h1 class="text-4xl font-bold text-gray-900 dark:text-white tracking-tight">Student Projects</h1>
-
+        
             <a href="{{ route('projects.create') }}"
                 class="inline-flex items-center bg-teal-600 text-white px-5 py-2.5 rounded-md shadow-md hover:bg-teal-700 transition duration-200 hover:scale-105">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2"
                     viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round"
                     d="M12 4v16m8-8H4" /></svg>
-                Add Project
+                Upload Project
             </a>
         </div>
 
@@ -55,12 +55,14 @@
                     </div>
                 @endforeach
             </div>
+
+            
         @else
             <p class="text-center text-gray-600 dark:text-gray-400 mt-10 text-lg">No projects found.</p>
         @endif
 
         {{-- Pagination --}}
-        <div class="mt-10">
+        <div class="mt-12">
             {{ $projects->links() }}
         </div>
     </div>
