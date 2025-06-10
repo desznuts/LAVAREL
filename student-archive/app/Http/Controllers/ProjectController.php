@@ -22,10 +22,11 @@ class ProjectController extends Controller
         }
 
         if ($request->filled('category_id')) {
-            $query->where('category_id', $request->category_id);
+            $categoryIds = (array) $request->category_id;
+            $query->whereIn('category_id', $categoryIds);
         }
 
-        $projects = $query->latest()->paginate(9);
+        $projects = $query->latest()->paginate(12);
         $categories = Category::all();
 
         return view('projects.index', compact('projects', 'categories'));
@@ -138,14 +139,15 @@ class ProjectController extends Controller
             abort(404, 'File not found.');
         }
 
-        $mimeType = Storage::disk('public')->mimeType($project->file_path);
+        $fullPath = storage_path('app/public/' . $project->file_path);
+        $mimeType = mime_content_type($fullPath);
 
         if ($mimeType !== 'application/pdf') {
             abort(403, 'Preview only available for PDF files.');
         }
 
         return response()->file(
-            storage_path('app/public/' . $project->file_path),
+            $fullPath,
             [
                 'Content-Type' => $mimeType,
                 'Content-Disposition' => 'inline; filename="' . basename($project->file_path) . '"',

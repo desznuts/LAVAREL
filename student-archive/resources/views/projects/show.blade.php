@@ -4,14 +4,6 @@
             <a href="{{ route('projects.index') }}" class="text-xl font-extrabold text-gray-900 dark:text-gray-100 tracking-wide hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 &larr; Projects
             </a>
-            <!-- <nav aria-label="Primary navigation">
-                <ul class="flex space-x-6 text-gray-700 dark:text-gray-300 text-base font-medium">
-        
-                    <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a></li>
-                    <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Docs</a></li>
-                    <li><a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Support</a></li>
-                </ul>
-            </nav> -->
         </div>
     </header>
 
@@ -29,35 +21,46 @@
                     <p class="font-semibold text-lg text-gray-700 dark:text-gray-300 mb-1 select-text">
                         Category: <span class="font-normal">{{ $project->category->name }}</span>
                     </p>
+                    <p class="text-base text-gray-600 dark:text-gray-400 select-text">
+                        Owner: <span class="font-medium">{{ $project->user->name }}</span>
+                    </p>
                 </section>
 
                 <section class="mb-12" aria-labelledby="project-description">
                     <h2 id="project-description" class="sr-only">Project Description</h2>
 
-                    <div
-                        id="description-container"
-                        class="relative overflow-hidden max-h-24 opacity-100 transition-[max-height,opacity] duration-300 ease-in-out"
-                        aria-live="polite"
-                    >
-                        <p
-                            id="description-text"
-                            class="whitespace-pre-wrap text-gray-600 dark:text-gray-300 leading-relaxed text-base break-words m-0 select-text"
-                        >
-                            {!! nl2br(e(Str::limit($project->description, 150))) !!}@if(strlen($project->description) > 150)&#8230;@endif
-                        </p>
-                    </div>
+                    @php
+                        $fullDescription = nl2br(e($project->description));
+                        $shortDescription = nl2br(e(Str::limit($project->description, 150)));
+                        $isLong = strlen($project->description) > 150;
+                    @endphp
 
-                    @if(strlen($project->description) > 150)
-                        <button
-                            id="toggle-description"
-                            aria-expanded="false"
-                            aria-controls="description-container"
-                            class="mt-6 px-0 py-2 text-blue-600 dark:text-blue-400 underline font-semibold text-base hover:text-blue-800 dark:hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl transition-colors"
-                            type="button"
+                    <div x-data="{ expanded: false }">
+                        <div
+                            class="relative overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out"
+                            :class="expanded ? 'max-h-[1000px] opacity-100' : 'max-h-24 opacity-100'"
+                            aria-live="polite"
+                            id="description-container"
                         >
-                            Show More
-                        </button>
-                    @endif
+                            <p
+                                class="whitespace-pre-wrap text-gray-600 dark:text-gray-300 leading-relaxed text-base break-words m-0 select-text"
+                                x-html="expanded ? @js($fullDescription) : @js($shortDescription) + '{{ $isLong ? '&#8230;' : '' }}'"
+                                id="description-text"
+                            ></p>
+                        </div>
+
+                        @if($isLong)
+                            <button
+                                x-on:click="expanded = !expanded"
+                                x-text="expanded ? 'Show Less' : 'Show More'"
+                                :aria-expanded="expanded"
+                                aria-controls="description-container"
+                                class="mt-6 px-0 py-2 text-blue-600 dark:text-blue-400 font-semibold text-base hover:text-blue-800 dark:hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl transition-colors"
+                                type="button"
+                                id="toggle-description"
+                            ></button>
+                        @endif
+                    </div>
                 </section>
 
                 <section class="mb-12">
@@ -113,63 +116,4 @@
             </article>
         </div>
     </main>
-
-    @if(strlen($project->description) > 150)
-        <style>
-            /* Prevent jumpy scroll by animating max-height from fixed value to larger fixed value */
-            #description-container.expanded {
-                max-height: 1000px; /* large enough to show full text */
-                opacity: 1;
-            }
-
-            #description-container.collapsing {
-                opacity: 0;
-            }
-        </style>
-
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        const button = document.getElementById('toggle-description');
-                        const container = document.getElementById('description-container');
-                        const descriptionText = document.getElementById('description-text');
-                        // Use JSON string with newlines preserved
-                        const fullText = @json(nl2br(e($project->description)));
-                        const shortText = fullText.slice(0, 500) + (fullText.length > 500 ? '…' : '');
-                        const collapsedMaxHeight = '6rem'; // 24 (6*4) / Tailwind max-h-24 from initial
-
-                        // Initialize collapsed state
-                        container.style.maxHeight = collapsedMaxHeight;
-                        descriptionText.innerHTML = shortText;
-
-                        let isExpanded = false;
-
-                        button.addEventListener('click', function () {
-                            if (!isExpanded) {
-                                // Expand: Set full text first, then animate max-height bigger
-                                descriptionText.innerHTML = fullText;
-                                container.classList.add('expanded');
-                                container.style.maxHeight = '1000px'; // large value for smooth expand
-                                button.textContent = 'Show Less';
-                                button.setAttribute('aria-expanded', 'true');
-                            } else {
-                                // Collapse: Animate max-height smaller and then set short text
-                                container.style.maxHeight = collapsedMaxHeight;
-                                button.textContent = 'Show More';
-                                button.setAttribute('aria-expanded', 'false');
-
-                                // Wait for transition to finish before switching text to avoid jump
-                                container.addEventListener('transitionend', function handler(e) {
-                                    if (e.propertyName === 'max-height') {
-                                        descriptionText.innerHTML = shortText;
-                                        container.classList.remove('expanded');
-                                        container.removeEventListener('transitionend', handler);
-                                    }
-                                });
-                            }
-                            isExpanded = !isExpanded;
-                        });
-                    });
-                </script>
-    @endif
 </x-layout>
-

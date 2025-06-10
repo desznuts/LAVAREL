@@ -52,7 +52,7 @@
                 @endif
             </div>
 
-            <div class="flex space-x-4 mt-6">
+            <div class="flex space-x-6 mt-6">
                 <a href="{{ route('projects.show', $project) }}" class="flex-1 bg-gray-400 text-white font-semibold px-6 py-3 rounded-md hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition text-center">
                     Cancel
                 </a>

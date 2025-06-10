@@ -1,7 +1,7 @@
 <x-layout>
     <div class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 px-4">
         <div class="max-w-3xl w-full py-10 px-6 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm">
-            <h2 class="text-2xl font-semibold mb-6 text-gray-900 dark:text-gray-100 text-center">Add New Project</h2>
+            <h2 class="text-2xl font-semibold mb-6 text-gray-900 dark:text-gray-100 text-center mt-4">Add New Project</h2>
 
             <form action="{{ route('projects.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
                 @csrf
@@ -16,7 +16,7 @@
                 </div>
 
                 <div>
-                    <label for="category_id" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300">Category</label>
+                    <label for="category_id" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300 mt-2">Category</label>
                     <select id="category_id" name="category_id" required
                         class="w-full border border-gray-400 dark:border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200">
                         <option value="">Select category</option>
@@ -30,7 +30,7 @@
                 </div>
 
                 <div>
-                    <label for="description" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300">Description</label>
+                    <label for="description" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300 mt-2">Description</label>
                     <textarea id="description" name="description" rows="4"
                         class="w-full border border-gray-400 dark:border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"></textarea>
                     @error('description')
@@ -48,7 +48,7 @@
                 </div>
 
                 <div>
-                    <label for="file" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300">Upload File (optional)</label>
+                    <label for="file" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300 mt-2">Upload File (PDF)</label>
                     <input type="file" id="file" name="file" accept=".pdf,.doc,.docx"
                         class="w-full text-gray-700 dark:text-gray-300 file:border file:border-gray-400 dark:file:border-gray-600 file:rounded px-3 file:py-2 file:bg-white dark:file:bg-gray-700 file:text-sm file:font-semibold file:cursor-pointer hover:file:bg-blue-600 hover:file:text-white transition" />
                     @error('file')
@@ -58,7 +58,7 @@
 
                 <div>
                     <button type="submit"
-                        class="w-full bg-blue-600 text-white font-semibold px-6 py-3 rounded hover:bg-blue-700 active:bg-blue-800 transition focus:outline-none focus:ring-4 focus:ring-blue-400">
+                        class="w-full bg-blue-600 text-white font-semibold px-6 py-3 rounded hover:bg-blue-700 active:bg-blue-800 transition focus:outline-none focus:ring-4 focus:ring-blue-400 mt-4 mb-2">
                         Save Project
                     </button>
                 </div>
