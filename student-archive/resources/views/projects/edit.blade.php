@@ -16,7 +16,7 @@
             </div>
 
             <div>
-                <label for="category_id" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300">Category</label>
+                <label for="category_id" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300 mt-2">Category</label>
                 <select id="category_id" name="category_id" required
                     class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
                     <option value="">Select category</option>
@@ -30,7 +30,7 @@
             </div>
 
             <div>
-                <label for="description" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300">Description</label>
+                <label for="description" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300 mt-2">Description</label>
                 <textarea id="description" name="description" rows="4"
                     class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">{{ old('description', $project->description) }}</textarea>
                 @error('description')<p class="text-red-600 mt-1 text-sm">{{ $message }}</p>@enderror
@@ -38,14 +38,20 @@
 
             <div>
                 <label for="year" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300">Year</label>
-                <input type="number" id="year" name="year" min="1900" max="{{ date('Y') }}" required value="{{ old('year', $project->year) }}"
-                    class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" />
+                <select id="year" name="year" required
+                    class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                    <option value="">Select year</option>
+                    @for ($y = date('Y'); $y >= 1900; $y--)
+                        <option value="{{ $y }}" {{ old('year', $project->year) == $y ? 'selected' : '' }}>{{ $y }}</option>
+                    @endfor
+                </select>
                 @error('year')<p class="text-red-600 mt-1 text-sm">{{ $message }}</p>@enderror
             </div>
 
             <div>
-                <label for="file" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300">Upload File (optional)</label>
-                <input type="file" id="file" name="file" accept=".pdf,.doc,.docx" class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" />
+                <label for="file" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300 mt-2">Upload File (PDF)</label>
+                <input type="file" id="file" name="file" accept=".pdf,application/pdf"
+                    class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" />
                 @error('file')<p class="text-red-600 mt-1 text-sm">{{ $message }}</p>@enderror
                 @if($project->file_path)
                     <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Current file: <a href="{{ asset('storage/' . $project->file_path) }}" target="_blank" class="text-blue-600 underline hover:text-blue-800 transition">Download</a></p>

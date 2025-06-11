@@ -40,8 +40,13 @@
 
                 <div>
                     <label for="year" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300">Year</label>
-                    <input type="number" id="year" name="year" min="1900" max="{{ date('Y') }}" required
-                        class="w-full border border-gray-400 dark:border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200" />
+                    <select id="year" name="year" required
+                        class="w-full border border-gray-400 dark:border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200">
+                        <option value="">Select year</option>
+                        @for ($y = date('Y'); $y >= 1900; $y--)
+                            <option value="{{ $y }}">{{ $y }}</option>
+                        @endfor
+                    </select>
                     @error('year')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -49,7 +54,7 @@
 
                 <div>
                     <label for="file" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300 mt-2">Upload File (PDF)</label>
-                    <input type="file" id="file" name="file" accept=".pdf,.doc,.docx"
+                    <input type="file" id="file" name="file" accept=".pdf,application/pdf"
                         class="w-full text-gray-700 dark:text-gray-300 file:border file:border-gray-400 dark:file:border-gray-600 file:rounded px-3 file:py-2 file:bg-white dark:file:bg-gray-700 file:text-sm file:font-semibold file:cursor-pointer hover:file:bg-blue-600 hover:file:text-white transition" />
                     @error('file')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
