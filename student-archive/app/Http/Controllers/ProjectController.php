@@ -45,7 +45,7 @@ class ProjectController extends Controller
             'description' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
             'year' => 'required|integer|min:1900|max:' . date('Y'),
-            'file' => 'nullable|file|mimes:pdf|max:5120',
+            'file' => 'required|file|mimes:pdf|max:5120',
         ]);
 
         $project = new Project();

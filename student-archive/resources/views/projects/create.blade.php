@@ -54,7 +54,7 @@
 
                 <div>
                     <label for="file" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300 mt-2">Upload File (PDF)</label>
-                    <input type="file" id="file" name="file" accept=".pdf,application/pdf"
+                    <input type="file" id="file" name="file" accept=".pdf,application/pdf" required
                         class="w-full text-gray-700 dark:text-gray-300 file:border file:border-gray-400 dark:file:border-gray-600 file:rounded px-3 file:py-2 file:bg-white dark:file:bg-gray-700 file:text-sm file:font-semibold file:cursor-pointer hover:file:bg-blue-600 hover:file:text-white transition" />
                     @error('file')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
