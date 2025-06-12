@@ -50,7 +50,7 @@
 
             <div>
                 <label for="file" class="block mb-2 font-semibold text-gray-700 dark:text-gray-300 mt-2">Upload File (PDF)</label>
-                <input type="file" id="file" name="file" accept=".pdf,application/pdf"
+                <input type="file" id="file" name="file" accept=".pdf,application/pdf" 
                     class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" />
                 @error('file')<p class="text-red-600 mt-1 text-sm">{{ $message }}</p>@enderror
                 @if($project->file_path)
